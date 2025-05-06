@@ -1,23 +1,46 @@
 let firstOperand;
 let operator;
 let secondOperand;
+let isOperation; // symbolise that the current display has been use for / result of operation
+//TODO: find a better way to reset the display on new set of number than "isOperation approach"
+
+const display = document.querySelector("#displayContainer");
+const numbersBtn = document.querySelectorAll(".numberBtn");
+const operatorsBtn = document.querySelectorAll(".operatorBtn");
+const equalBtn = document.querySelector("#equalBtn");
+
+numbersBtn.forEach(button => button.addEventListener('click', () => {
+    if (isOperation == true) {
+        display.textContent = ''
+        isOperation = false;
+    }
+
+    display.textContent += button.textContent
+}));
+
+operatorsBtn.forEach(button => button.addEventListener('click', () => {
+    firstOperand = firstOperand == undefined ? display.textContent : firstOperand;
+    operator = button.textContent;
+    isOperation = true;
+}))
+
+equalBtn.addEventListener('click', () => {
+    secondOperand = display.textContent;
+    display.textContent = operate(+firstOperand, +secondOperand, operator);
+    firstOperand = display.textContent;
+    isOperation = true;
+})
 
 function operate(firstOperand, secondOperand, operator) {
     switch (operator) {
         case '+':
-            console.log(add(firstOperand, secondOperand));
-            break;
+            return add(firstOperand, secondOperand);
         case '-':
-            console.log(subtract(firstOperand, secondOperand));
-            break;
+            return subtract(firstOperand, secondOperand);
         case '*':
-            console.log(multiply(firstOperand, secondOperand));
-            break;
+            return multiply(firstOperand, secondOperand);
         case '/':
-            console.log(divide(firstOperand, secondOperand));
-            break;
-        default:
-            console.log("Invalid operator!")
+            return divide(firstOperand, secondOperand);
     }
 }
 
@@ -36,4 +59,3 @@ function multiply(a, b) {
 function divide(a, b) {
     return a / b;
 }
-
