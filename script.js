@@ -1,19 +1,22 @@
 let firstOperand;
 let currentOperator;
 let secondOperand;
-let isOperation; // symbolise that the current display has been use for / result of operation
-//TODO: find a better way to reset the display on new set of number than "isOperation approach"
+let isOperation; 
+let isNumber;
 
 const display = document.querySelector("#displayContainer");
 const numbersBtn = document.querySelectorAll(".numberBtn");
 const operatorsBtn = document.querySelectorAll(".operatorBtn");
 const equalBtn = document.querySelector("#equalBtn");
+const clearBtn = document.querySelector("#clearBtn");
 
 numbersBtn.forEach(button => button.addEventListener('click', () => numberInput(button.textContent)));
 
 operatorsBtn.forEach(button => button.addEventListener('click', () => operatorInput(button.textContent)));
 
-equalBtn.addEventListener('click', equalOperation)
+equalBtn.addEventListener('click', equalOperation);
+
+clearBtn.addEventListener('click', reset);
 
 function numberInput (number) {
     if (isOperation == true) {
@@ -22,22 +25,37 @@ function numberInput (number) {
     }
 
     display.textContent += number;
+    isNumber = true;
 }
 
 function operatorInput (operator) {
-    firstOperand = firstOperand == undefined ? display.textContent : firstOperand;
+    if (!isNumber) return;
+    firstOperand = firstOperand == undefined ? display.textContent : equalOperation();
     currentOperator = operator;
     isOperation = true;
+    isNumber = false;
 }
 
 function equalOperation () {
     secondOperand = display.textContent;
-    display.textContent = operate(+firstOperand, +secondOperand, currentOperator);
-    firstOperand = display.textContent;
-    isOperation = true;
+
+    if (operate(currentOperator, +firstOperand, +secondOperand) == NaN || operate(currentOperator, +firstOperand, +secondOperand) == undefined) {
+        return;
+    }
+    
+    if (Number.isInteger(operate(currentOperator, +firstOperand, +secondOperand))) {
+        display.textContent = operate(currentOperator, +firstOperand, +secondOperand);
+    } else {
+        display.textContent = +operate(currentOperator, +firstOperand, +secondOperand).toFixed(2);
+    }
+
+    secondOperand = '';
+    currentOperator = '';
+
+    return display.textContent;
 }
 
-function operate(firstOperand, secondOperand, operator) {
+function operate(operator, firstOperand, secondOperand) {
     switch (operator) {
         case '+':
             return add(firstOperand, secondOperand);
@@ -64,4 +82,14 @@ function multiply(a, b) {
 
 function divide(a, b) {
     return a / b;
+}
+
+function reset() {
+    display.textContent = '';
+
+    firstOperand = undefined;
+    currentOperator = undefined;
+    secondOperand = undefined;
+    isOperation = false; 
+    isNumber = false;
 }
