@@ -8,36 +8,43 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div id="displayContainer">
- 
-    </div>
-    <div id="buttonContainer">
-        <div id="numbersContainer">
-            <button class="numberBtn">7</button>
-            <button class="numberBtn">8</button>
-            <button class="numberBtn">9</button>
-
-            <button class="numberBtn">4</button>
-            <button class="numberBtn">5</button>
-            <button class="numberBtn">6</button>
-
-            <button class="numberBtn">1</button>
-            <button class="numberBtn">2</button>
-            <button class="numberBtn">3</button>
-
-            <button class="numberBtn">0</button>
+    <div id="calculatorContainer">
+        <div id="displayContainer">
+             
         </div>
-        
-        <div id="operatorsContainer">
-            <button class="operatorBtn">+</button>
-            <button class="operatorBtn">-</button>
-            <button class="operatorBtn">*</button>
-            <button class="operatorBtn">/</button>
-            <button id="equalBtn">=</button>
-        </div>
+        <div id="buttonContainer">
+            <div class="row">
+                <button class="numberBtn">7</button>
+                <button class="numberBtn">8</button>
+                <button class="numberBtn">9</button>
+                <button>del</button>
+            </div>
+            
+            <div class="row">
+                <button class="numberBtn">4</button>
+                <button class="numberBtn">5</button>
+                <button class="numberBtn">6</button>
+                <button class="operatorBtn">+</button>
+            </div>
+            
+            <div class="row">
+                <button class="numberBtn">1</button>
+                <button class="numberBtn">2</button>
+                <button class="numberBtn">3</button>
+                <button class="operatorBtn">-</button>
+            </div>
 
-        <div>
-            <button id="clearBtn">clear</button>
+            <div class="row">
+                <button>.</button>
+                <button class="numberBtn">0</button>
+                <button class="operatorBtn">/</button>
+                <button class="operatorBtn">*</button>
+            </div>
+                
+            <div class="row">
+                <button id="clearBtn">clear</button>
+                <button id="equalBtn">=</button>
+            </div>            
         </div>
     </div>
 </body>

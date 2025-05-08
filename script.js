@@ -20,7 +20,7 @@ clearBtn.addEventListener('click', reset);
 
 function numberInput (number) {
     if (isOperation == true) {
-        display.textContent = ''
+        display.textContent = '';
         isOperation = false;
     }
 
@@ -46,7 +46,7 @@ function equalOperation () {
     if (Number.isInteger(operate(currentOperator, +firstOperand, +secondOperand))) {
         display.textContent = operate(currentOperator, +firstOperand, +secondOperand);
     } else {
-        display.textContent = +operate(currentOperator, +firstOperand, +secondOperand).toFixed(2);
+        display.textContent = operate(currentOperator, +firstOperand, +secondOperand).toFixed(2);
     }
 
     secondOperand = '';
