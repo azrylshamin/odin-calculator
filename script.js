@@ -41,8 +41,12 @@ function numberInput (number) {
 }
 
 function operatorInput (operator) {
-    if (!isNumber) return;
-    firstOperand = firstOperand == undefined ? display.textContent : equalOperation();
+    if (firstOperand == undefined && display.textContent == '') return;
+    
+    if (currentOperator) {
+        equalOperation();
+    }
+    firstOperand = display.textContent;
     currentOperator = operator;
     isOperation = true;
     isNumber = false;
@@ -60,6 +64,8 @@ function equalOperation () {
     } else {
         display.textContent = operate(currentOperator, +firstOperand, +secondOperand).toFixed(2);
     }
+
+    firstOperand = display.textContent; 
 
     secondOperand = '';
     currentOperator = '';
