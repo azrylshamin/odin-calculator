@@ -5,6 +5,7 @@ let currentOperator;
 let secondOperand;
 let isOperation; 
 let isNumber;
+let isResult;
 
 const display = document.querySelector("#displayContainer");
 const numbersBtn = document.querySelectorAll(".numberBtn");
@@ -29,9 +30,10 @@ deleteBtn.addEventListener('click', backspaceInput);
 document.addEventListener('keydown', (e) => keyboardInput(e));
 
 function numberInput (number) {
-    if (isOperation == true) {
+    if (isOperation == true || isResult == true) {
         display.textContent = '';
         isOperation = false;
+        isResult = false;
     }
 
     display.textContent += number;
@@ -61,6 +63,7 @@ function equalOperation () {
 
     secondOperand = '';
     currentOperator = '';
+    isResult = true;
 
     return display.textContent;
 }
@@ -102,7 +105,6 @@ function keyboardInput(e) {
         operatorInput(e.key);
     }
 
-
     switch(e.key){
         case '=':
             equalOperation();
@@ -115,7 +117,6 @@ function keyboardInput(e) {
         case "Backspace":
             backspaceInput();
     }
-
 }
 
 function add(a, b) {
