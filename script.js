@@ -1,3 +1,5 @@
+// TODO: clear display after operation
+
 let firstOperand;
 let currentOperator;
 let secondOperand;
@@ -23,6 +25,8 @@ clearBtn.addEventListener('click', reset);
 decimalBtn.addEventListener('click', addDecimal);
 
 deleteBtn.addEventListener('click', backspaceInput);
+
+document.addEventListener('keydown', (e) => keyboardInput(e));
 
 function numberInput (number) {
     if (isOperation == true) {
@@ -85,6 +89,33 @@ function backspaceInput() {
     if(display.textContent.length > 0) {
         display.textContent = display.textContent.slice(0, -1);
     }
+}
+
+function keyboardInput(e) {
+    const operators = ['+', '-', '*', '/'];
+    
+    if (Number.isInteger(parseInt(e.key))) {
+        numberInput(e.key);
+    }
+
+    if (operators.includes(e.key)){
+        operatorInput(e.key);
+    }
+
+
+    switch(e.key){
+        case '=':
+            equalOperation();
+            break;
+        case "Delete":
+            reset();
+        case '.':
+            addDecimal();
+            break
+        case "Backspace":
+            backspaceInput();
+    }
+
 }
 
 function add(a, b) {
